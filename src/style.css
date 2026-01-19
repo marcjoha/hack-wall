@@ -1,0 +1,359 @@
+/* Keep only essential layout and dynamic styles */
+
+:root {
+  --pico-border-radius: 12px;
+}
+
+body,
+html,
+#app {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Prevent transitions on load */
+body.preload * {
+  transition: none !important;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
+  transform: scale(0.95);
+  z-index: 1;
+}
+
+.screen.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  transform: scale(1);
+  z-index: 10;
+}
+
+/* Enable scrolling for the config screen specifically */
+#config-screen.active {
+  position: fixed;
+  /* Break out of the centered parent container */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  overflow-y: auto;
+  /* Use safe centering via margin:auto on child */
+  align-items: flex-start;
+  z-index: 100;
+  /* Ensure it's on top of everything */
+}
+
+#config-screen article {
+  margin: auto;
+  /* Vertically and horizontally center safely */
+  margin-top: auto;
+  margin-bottom: auto;
+  max-width: 500px;
+  background: rgba(var(--pico-card-background-color-rgb, 20, 30, 50), 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  /* Removed max-height/overflow from previous fix */
+}
+
+#config-screen label {
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+#config-screen footer {
+  margin-top: 1rem;
+}
+
+/* Add breathing room between form elements */
+#config-screen .custom-select,
+#config-screen input {
+  margin-bottom: 1rem;
+}
+
+/* Wall Screen Content */
+#wall-screen .content {
+  text-align: center;
+  color: white;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 3rem 5rem;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+#display-mission {
+  font-size: 4rem;
+  margin: 0;
+  letter-spacing: 4px;
+  color: #ffffff;
+  font-weight: 900;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 4px 12px rgba(0, 0, 0, 0.8);
+}
+
+.timer {
+  font-size: 10rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  margin-top: 1rem;
+  line-height: 1;
+}
+
+#bg-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  transition: background 1s ease;
+}
+
+/* Background Styles */
+.cyber {
+  background: radial-gradient(circle at center, #2e1065 0%, #0f172a 100%);
+}
+
+.matrix {
+  background: #000;
+}
+
+#matrix-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.matrix+main+#matrix-canvas,
+#bg-layer.matrix~#matrix-canvas,
+.starfield+main+#matrix-canvas,
+#bg-layer.starfield~#matrix-canvas {
+  opacity: 1;
+}
+
+.cyber::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.sunset {
+  background: linear-gradient(135deg, #f43f5e 0%, #8b5cf6 50%, #0ea5e9 100%);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+.emerald {
+  background: radial-gradient(circle at top right, #065f46 0%, #064e3b 50%, #022c22 100%);
+}
+
+.aurora {
+  background: #000;
+  overflow: hidden;
+}
+
+.aurora::before,
+.aurora::after {
+  content: '';
+  position: absolute;
+  inset: -100%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 255, 150, 0.4), transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(0, 150, 255, 0.3), transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(150, 0, 255, 0.3), transparent 40%);
+  filter: blur(60px);
+  animation: aurora-move 20s infinite alternate linear;
+}
+
+.aurora::after {
+  animation-duration: 25s;
+  animation-direction: alternate-reverse;
+  opacity: 0.7;
+}
+
+
+
+
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes aurora-move {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(180deg) scale(1.5);
+  }
+
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  #display-mission {
+    font-size: 2rem;
+  }
+
+  .timer {
+    font-size: 4rem;
+  }
+
+
+
+}
+
+/* Custom Select Styles */
+.custom-select {
+  position: relative;
+  font-family: inherit;
+  width: 100%;
+}
+
+.select-selected {
+  background-color: var(--pico-form-element-background-color);
+  color: var(--pico-color);
+  padding: var(--pico-form-element-spacing-vertical) var(--pico-form-element-spacing-horizontal);
+  border: var(--pico-border-width) solid var(--pico-border-color);
+  border-radius: var(--pico-border-radius);
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: border-color var(--pico-transition), box-shadow var(--pico-transition);
+}
+
+.select-selected:after {
+  content: "";
+  width: 0.6em;
+  height: 0.6em;
+  background-image: var(--pico-icon-chevron);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: block;
+  margin-left: 0.5em;
+  transition: transform 0.2s ease;
+}
+
+.select-selected.select-arrow-active:after {
+  transform: rotate(180deg);
+}
+
+.select-selected:hover {
+  border-color: var(--pico-form-element-border-color-hover);
+}
+
+.select-selected.select-arrow-active {
+  border-color: var(--pico-form-element-active-border-color);
+  box-shadow: 0 0 0 var(--pico-form-element-focus-color);
+}
+
+.select-items {
+  position: absolute;
+  background-color: var(--pico-card-background-color);
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  border: var(--pico-border-width) solid var(--pico-muted-border-color);
+  border-radius: var(--pico-border-radius);
+  margin-top: 5px;
+  max-height: 300px;
+  overflow-y: auto;
+  box-shadow: var(--pico-card-box-shadow);
+}
+
+.select-hide {
+  display: none;
+}
+
+.select-items div {
+  color: var(--pico-color);
+  padding: 8px 16px;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  /* This pushes the marker to the right */
+  align-items: center;
+  border-bottom: 1px solid var(--pico-muted-border-color);
+}
+
+.select-items div:last-child {
+  border-bottom: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+  background-color: var(--pico-primary-background);
+  color: var(--pico-primary-inverse);
+}
+
+#end-time::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+#end-time {
+  background-image: none;
+}

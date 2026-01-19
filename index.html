@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hack-wall</title>
+</head>
+
+<body class="preload">
+  <div id="app">
+    <div id="bg-layer"></div>
+    <main class="container">
+      <div id="config-screen" class="screen active">
+        <article>
+          <form id="config-form">
+            <label for="mission">Mission Title
+              <input type="text" id="mission" name="mission" placeholder="e.g. Save the World" required>
+            </label>
+
+            <div class="grid">
+              <div>
+                <label for="end-time">Endtime</label>
+                <input type="time" id="end-time" name="end-time">
+              </div>
+
+              <div>
+                <label for="duration">Duration</label>
+                <select id="duration" name="duration">
+                  <option value="">...</option>
+                  <option value="15m">15 Minutes</option>
+                  <option value="30m">30 Minutes</option>
+                  <option value="45m">45 Minutes</option>
+                  <option value="1h">1 Hour</option>
+                  <option value="90m">90 Minutes</option>
+                  <option value="2h">2 Hours</option>
+                  <option value="3h">3 Hours</option>
+                  <option value="4h">4 Hours</option>
+                </select>
+              </div>
+            </div>
+
+            <label for="bg-style">Background</label>
+            <select id="bg-style" name="bg-style">
+              <option value="cyber">Cyber Gradient</option>
+              <option value="emerald">Emerald Glass</option>
+              <option value="sunset" data-decorator="✨">Liquid Sunset</option>
+              <option value="aurora" data-decorator="✨">Aurora Borealis</option>
+              <option value="starfield" data-decorator="✨">Deep Space</option>
+              <option value="matrix" data-decorator="✨">Matrix Rain</option>
+            </select>
+
+            <label for="sound-style">Soundscape</label>
+            <select id="sound-style" name="sound-style">
+              <option value="silent">Silent</option>
+              <option value="cyber">Cyberpunk Drone</option>
+              <option value="space">Deep Space</option>
+              <option value="arcade">Retro Arcade</option>
+              <option value="lounge">Lounge Jazz</option>
+              <option value="elevator">Elevator Music</option>
+            </select>
+
+            <footer>
+              <button type="submit">Launch</button>
+            </footer>
+          </form>
+        </article>
+      </div>
+
+      <div id="wall-screen" class="screen">
+        <div class="content">
+          <h1 id="display-mission"></h1>
+          <div id="timer" class="timer">00:00:00</div>
+        </div>
+
+      </div>
+    </main>
+    <canvas id="matrix-canvas"></canvas>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>

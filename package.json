@@ -1,0 +1,29 @@
+{
+  "name": "hack-wall",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A sci-fi countdown timer and dashboard for hackathons.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "hackathon",
+    "timer",
+    "countdown",
+    "cyberpunk",
+    "matrix",
+    "dashboard"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "vite": "^7.2.4"
+  },
+  "dependencies": {
+    "@picocss/pico": "^2.1.1"
+  }
+}
