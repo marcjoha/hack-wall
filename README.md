@@ -1,5 +1,7 @@
 # Hack Wall
 
+[**🚀 Live Demo**](https://marcjoha.github.io/hack-wall/)
+
 A dynamic, sci-fi inspired countdown timer and dashboard for hackathons. Features immersive backgrounds (Matrix Rain, Starfield), soundscapes, and a highly configurable display.
 
 ## Features
