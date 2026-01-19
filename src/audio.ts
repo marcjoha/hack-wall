@@ -182,12 +182,12 @@ export class SoundManager {
 
     private async playLounge(destination: AudioNode) {
         if (!this.ctx) return;
-        await this.playSample('/lounge.mp3', 1.0, destination);
+        await this.playSample(import.meta.env.BASE_URL + 'lounge.mp3', 1.0, destination);
     }
 
     private async playElevator(destination: AudioNode) {
         if (!this.ctx) return;
-        await this.playSample('/elevator.mp3', 0.8, destination);
+        await this.playSample(import.meta.env.BASE_URL + 'elevator.mp3', 0.8, destination);
     }
 
     private async playSample(url: string, volume: number, destination: AudioNode) {
